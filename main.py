@@ -8,9 +8,9 @@ async def send_welcome(message):
 async def echo_message(message):
     text_message = message.text
     text_message = text_message.lower()
-    if 'дела' in message or 'настроение' in message:
+    if 'дела' in text_message or 'настроение' in text_message:
         await bot.reply_to(message, 'Хорошо, а у тебя?')
-    elif 'шутка' in message:
+    elif 'шутка' in text_message:
         await bot.reply_to(message, 'Колобок повесился')
     else:
         await bot.reply_to(message, 'Извините, я вас не понял?')
