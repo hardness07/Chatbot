@@ -2,7 +2,8 @@ from telebot.async_telebot import AsyncTeleBot
 bot = AsyncTeleBot('6339583214:AAEJZoonfPmU3CpUMH0WtuQfpRt0FPDOqfQ')
 @bot.message_handler(commands=['help',  'start'])
 async def send_welcome(message):
-    await bot.reply_to(message, 'What`s up dude')
+    print(message)
+    await bot.reply_to(message, 'Здравствуйте, чем я могу помочь?')
 
 @bot.message_handler(func=lambda message: True)
 async def echo_message(message):
