@@ -13,7 +13,8 @@ async def send_hello(message):
     twob = 'Random🎲'
     threeb = 'Video🎥'
     fourb = 'Photo📷'
-    markup.add(oneb, twob, threeb, fourb, row_width=2)
+    fiveb = 'Location🗺️'
+    markup.add(oneb, twob, threeb, fourb, fiveb, row_width=2)
     await bot.send_message(chat_id, '✨Menu✨', reply_markup=markup)
 
 @bot.message_handler(commands=['help',  'start'])
@@ -24,10 +25,12 @@ async def send_welcome(message):
     twob = InlineKeyboardButton('Random🎲', callback_data='second')
     threeb = InlineKeyboardButton('Video🎥', callback_data='three')
     fourb = InlineKeyboardButton('Photo📷', callback_data='four')
+    fiveb = InlineKeyboardButton('Location🗺️', callback_data='five')
     markup.add(oneb)
     markup.add(twob)
     markup.add(threeb)
     markup.add(fourb)
+    markup.add(fiveb)
     await bot.send_message(chat_id, '✨Menu✨', reply_markup=markup)
 
 
