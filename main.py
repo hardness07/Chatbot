@@ -1,7 +1,13 @@
+import os
+
 from telebot.async_telebot import AsyncTeleBot
 from telebot.types import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
+from dotenv import load_dotenv, find_dotenv
 
-bot = AsyncTeleBot('6339583214:AAEJZoonfPmU3CpUMH0WtuQfpRt0FPDOqfQ')
+load_dotenv(find_dotenv())
+
+TOKEN = os.getenv('TOKEN')
+bot = AsyncTeleBot(TOKEN)
 
 #создание меню кнопок
 @bot.message_handler(commands=['help',  'start'])
@@ -17,6 +23,18 @@ async def send_hello(message):
     markup.add(oneb, twob, threeb, fourb, fiveb, row_width=2)
     await bot.send_message(chat_id, '✨Menu✨', reply_markup=markup)
 
+#создание таймера
+@bot.message_handler(commands=['kyky',  'timer'])
+async def send_vremya(message):
+    chat_id = message.from_user.id
+    bot_message = await bot.send_message(chat_id, 'Нaчался таймер 5 секунд')
+    for i in range(1,6):
+        await asyncio.sleep(1)
+        await bot.edit_message_text(f'{5-i} - секунд осталось', chat_id, bot_message.id)
+    #удаление сообщения бота
+    await bot.delete_message(chat_id, bot_message.id)
+
+#создание кнопок
 @bot.message_handler(commands=['help',  'start'])
 async def send_welcome(message):
     chat_id = message.from_user.id
@@ -32,8 +50,6 @@ async def send_welcome(message):
     markup.add(fourb)
     markup.add(fiveb)
     await bot.send_message(chat_id, '✨Menu✨', reply_markup=markup)
-
-
 
 #для рандомного числа на кубике
 @bot.message_handler(commands=['cube',  'number'])
@@ -84,8 +100,7 @@ async def send_youtube(message):
     chat_id = message.from_user.id
     await bot.send_photo(chat_id, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK2xNQoZUf8q_66qmTAl1E6drKD9qhp7336RqNM1lTS39PhCJhDD2N75xsOXNsKT-hTCY&usqp=CAU', caption='чиназес')
 
-
-
+#ответ на вопрос по слову
 @bot.message_handler(func=lambda message: True)
 async def echo_message(message):
     text_message = message.text
@@ -96,6 +111,20 @@ async def echo_message(message):
         await bot.reply_to(message, 'Колобок повесился')
     else:
         await bot.reply_to(message, 'Извините, я вас не понял?')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
