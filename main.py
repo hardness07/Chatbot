@@ -7,7 +7,7 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
 TOKEN = os.getenv('TOKEN')
-bot = AsyncTeleBot(TOKEN)
+bot = AsyncTeleBot(TOKEN, parse_mode='HTML')
 
 #создание меню кнопок
 @bot.message_handler(commands=['help',  'start'])
@@ -23,6 +23,19 @@ async def send_hello(message):
     markup.add(oneb, twob, threeb, fourb, fiveb, row_width=2)
     await bot.send_message(chat_id, '✨Menu✨', reply_markup=markup)
 
+@bot.message_handler(commands=['fddf',  'html'])
+async def send_tetetete(message):
+    chat_id = message.from_user.id
+    await bot.send_message(chat_id, '<i>курсив</i>')
+    await bot.send_message(chat_id, '<b>жирный</b>')
+    await bot.send_message(chat_id, '<u>подчеркнутый</u>')
+    await bot.send_message(chat_id, '<s>зачеркнутый</s>')
+    await bot.send_message(chat_id, '<code>моноширный</code>')
+    await bot.send_message(chat_id, '<pre>моноширный2</pre>')
+    await bot.send_message(chat_id, '<tg-spoiler>спойлер</tg-spoiler>')
+    await bot.send_message(chat_id, '<a href="https://github.com/hardness07">hide</a>')
+    await bot.send_message(chat_id, '<a href="tg://user?id=1466544138">inline mention of a user</a>')
+    
 #создание таймера
 @bot.message_handler(commands=['kyky',  'timer'])
 async def send_vremya(message):
@@ -39,7 +52,7 @@ async def send_vremya(message):
 async def send_draznylka(message):
     chat_id = message.from_user.id
     await bot.delete_message(chat_id, message.id)
-    
+
 #создание кнопок
 @bot.message_handler(commands=['help',  'start'])
 async def send_welcome(message):
