@@ -35,7 +35,7 @@ async def send_tetetete(message):
     await bot.send_message(chat_id, '<pre>моноширный2</pre>')
     await bot.send_message(chat_id, '<tg-spoiler>спойлер</tg-spoiler>')
     await bot.send_message(chat_id, '<a href="https://github.com/hardness07">hide</a>')
-    await bot.send_message(chat_id, '<a href="tg://user?id=1466544138">inline mention of a user</a>')
+    await bot.send_message(chat_id, '<a href="tg://user?id=1466544138">lovely boy</a>')
 
 #создание таймера
 @bot.message_handler(commands=['kyky',  'timer'])
