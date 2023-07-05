@@ -34,6 +34,12 @@ async def send_vremya(message):
     #удаление сообщения бота
     await bot.delete_message(chat_id, bot_message.id)
 
+#удаление сообщения пользователя
+@bot.message_handler(content_types=['text'])
+async def send_draznylka(message):
+    chat_id = message.from_user.id
+    await bot.delete_message(chat_id, message.id)
+    
 #создание кнопок
 @bot.message_handler(commands=['help',  'start'])
 async def send_welcome(message):
